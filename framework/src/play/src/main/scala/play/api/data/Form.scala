@@ -237,6 +237,7 @@ case class Form[T](mapping: Mapping[T], data: Map[String, String], errors: Seq[F
     Json.toJson(
       errors.groupBy(_.key).mapValues { errors =>
         errors.map(e => messages(e.message, e.args.map(a => translateMsgArg(a)): _*))
+        // ここで可変長引数で受け取れるようにする
       }
     )
 

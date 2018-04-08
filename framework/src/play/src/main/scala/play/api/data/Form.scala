@@ -433,6 +433,7 @@ case class FormError(key: String, messages: Seq[String], args: Seq[Any] = Nil) {
    */
   def format(implicit messages: play.api.i18n.Messages): String = {
     messages.apply(message, args: _*)
+    // ここ直そうと思ったらすでに_*になってた、pullすべきベースブランチ間違えた
   }
 }
 
@@ -440,7 +441,7 @@ object FormError {
 
   def apply(key: String, message: String) = new FormError(key, message)
 
-  def apply(key: String, message: String, args: _*) = new FormError(key, message, args)
+  def apply(key: String, message: String, args: Seq[Any]) = new FormError(key, message, args)
 
 }
 

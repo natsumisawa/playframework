@@ -440,7 +440,7 @@ object FormError {
 
   def apply(key: String, message: String) = new FormError(key, message)
 
-  def apply(key: String, message: String, args: Seq[Any]) = new FormError(key, message, args)
+  def apply(key: String, message: String, args: _*) = new FormError(key, message, args)
 
 }
 

@@ -707,12 +707,12 @@ package controllers {
   @Singleton
   class Assets @Inject() (errorHandler: HttpErrorHandler, meta: AssetsMetadata) extends AssetsBuilder(errorHandler, meta)
 
-  class AssetsBuilder(errorHandler: HttpErrorHandler, meta: AssetsMetadata) extends ControllerHelpers {
+  protected class AssetsBuilder(errorHandler: HttpErrorHandler, meta: AssetsMetadata) extends ControllerHelpers {
 
     import meta._
     import Assets._
 
-    protected private val Action = new ActionBuilder.IgnoringBody()(Execution.trampoline)
+    private val Action = new ActionBuilder.IgnoringBody()(Execution.trampoline)
 
     private def maybeNotModified(request: RequestHeader, assetInfo: AssetInfo, aggressiveCaching: Boolean): Option[Result] = {
       // First check etag. Important, if there is an If-None-Match header, we MUST not check the
